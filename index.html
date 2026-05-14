@@ -433,9 +433,19 @@ body.mobile-sim #topbar{border-radius:24px 24px 0 0}
   .mob-overdue-date{font-size:10px;color:var(--red)}
 }
 @media print{
-  #topbar,#sidebar,#bnav,.btn,.btnP,.btnG,.tabs,.moverlay,#loginScreen{display:none!important}
-  #content,html,body{overflow:visible;height:auto}
-  .page{display:block!important;padding:8px}
+  #topbar,#sidebar,#bnav,.btn,.btnP,.btnG,.tabs,.moverlay,#loginScreen,
+  .ph button, #repType, #repDur, #repDRng, #btnGenRep, .notif-panel{display:none!important}
+  #content,html,body{overflow:visible!important;height:auto!important;background:#fff!important}
+  #mainArea{overflow:visible!important;display:block!important}
+  .page{display:none!important;padding:8px}
+  #pg-report{display:block!important;padding:12px}
+  .rsec{background:#fff!important;border:1px solid #ddd!important;break-inside:avoid;page-break-inside:avoid;margin-bottom:12px}
+  .rsec h3{color:#2563eb!important}
+  .pfill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bdg,.sc{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  table{border-collapse:collapse;width:100%}
+  th,td{border:1px solid #e2e8f0}
+  @page{margin:15mm}
 }
 </style>
 </head>
@@ -548,7 +558,7 @@ body.mobile-sim #topbar{border-radius:24px 24px 0 0}
         <!-- PROJECTS + FEED (desktop 2-col, mobile stacked) -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px" id="dashGrid">
           <div class="card"><div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;margin-bottom:9px;color:var(--gold2)">📈 Project Health</div><div id="dProj"></div></div>
-          <div class="card"><div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;margin-bottom:9px;color:var(--gold2)">⚡ Today's Activity</div><div id="dFeed"></div></div>
+          <div class="card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px"><div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--gold2)">⚡ Today's Activity</div><button class="btn btnD btnSm" onclick="clearFeed()" style="font-size:10px;padding:3px 9px">🗑️ Clear</button></div><div id="dFeed"></div></div>
         </div>
       </div>
 
@@ -676,7 +686,7 @@ body.mobile-sim #topbar{border-radius:24px 24px 0 0}
 
       <!-- FEED -->
       <div class="page" id="pg-feed">
-        <div class="ph"><div class="ptitle">Activity Feed</div></div>
+        <div class="ph"><div class="ptitle">Activity Feed</div><button class="btn btnD" onclick="clearFeed()">🗑️ Clear Feed</button></div>
         <div id="feedList"></div>
       </div>
 
@@ -1057,7 +1067,7 @@ var DB = firebase.database();
 
 // ─── USERS ───
 var USERS = {
-  vraj:       {pass:"vraj1234",       name:"Vraj Patel",      role:"Project Manager"},
+  vraj:       {pass:"vraj1234",       name:"Vraj Bhavsar",    role:"Project Manager"},
   admin:      {pass:"buildtrack2024", name:"Admin",            role:"Project Manager"},
   supervisor: {pass:"super123",       name:"Site Supervisor",  role:"Site Supervisor"},
   engineer:   {pass:"eng123",         name:"Civil Engineer",   role:"Civil Engineer"},
@@ -1583,6 +1593,7 @@ function saveTask(){
   DB.ref("tasks/"+id).set(obj,function(err){
     if(err){alert("Save failed: "+err.message);return;}
     addFeed("created task",name);
+    refreshNotifs();
     closeM("mTK");
     clr("tkName","tkAssignee");
     sv("tkCat","Foundation"); sv("tkProject","");
@@ -1656,6 +1667,7 @@ function saveTaskUpdate(){
           DB.ref("gallery").push({url:ph,taskId:activeTask,uploadedBy:CU.name,ts:ts()});
         });
         addFeed("updated task",(D.tasks[activeTask]||{}).name||"");
+        refreshNotifs();
         closeM("mTU");
         sv("tuBlocker","");
         document.getElementById("tuBRW").style.display="none";
@@ -2202,6 +2214,15 @@ function renderFeed(){
   var el=document.getElementById("feedList");
   if(!items.length){el.innerHTML='<div class="empty"><div class="emico">📡</div><div class="emtxt">No activity yet</div></div>';return;}
   el.innerHTML=items.map(function(f){return'<div class="fitem"><div class="fico">🔔</div><div><div class="fwho">'+esc(f.user)+'</div><div class="fwhat">'+esc(f.action)+(f.detail?" — "+esc(f.detail):"")+'</div><div class="fwhen">'+fmtDT(f.ts)+'</div></div></div>';}).join("");
+}
+
+function clearFeed(){
+  if(!confirm("Clear all activity feed entries? This cannot be undone.")) return;
+  DB.ref("feedItems").remove(function(err){
+    if(err){alert("Failed to clear feed: "+err.message);return;}
+    D.feedItems={};
+    renderFeed();
+  });
 }
 
 // ═══════════════════════════════════════
