@@ -12,7 +12,7 @@
   --bg:#f0f4f8;--bg2:#e8edf3;--bg3:#dde4ed;--bg4:#cfd8e5;--bg5:#b8c8d8;
   --gold:#2563eb;--gold2:#3b82f6;--gold3:#60a5fa;
   --text:#1e293b;--text2:#334155;--text3:#64748b;
-  --green:#16a34a;--red:#dc2626;--orange:#ea580c;--blue:#2563eb;
+  --green:#16a34a;--red:#dc2626;--orange:#1d4ed8;--blue:#2563eb;
   --border:#cbd5e1;--border2:#94a3b8;
   --card:#ffffff;--r:14px;--r2:9px;
   --shadow:0 4px 24px rgba(30,41,59,.10);
@@ -118,11 +118,11 @@ body{display:flex;flex-direction:column}
 /* ── BADGE ── */
 .bdg{display:inline-flex;align-items:center;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px}
 .bdgA{background:rgba(22,163,74,.1);color:var(--green);border:1px solid rgba(22,163,74,.25)}
-.bdgH{background:rgba(234,88,12,.1);color:var(--orange);border:1px solid rgba(234,88,12,.25)}
+.bdgH{background:rgba(29,78,216,.1);color:#1d4ed8;border:1px solid rgba(29,78,216,.25)}
 .bdgD{background:rgba(37,99,235,.1);color:var(--blue);border:1px solid rgba(37,99,235,.25)}
 .bdgHi{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.25)}
 .bdgLo{background:rgba(22,163,74,.1);color:var(--green);border:1px solid rgba(22,163,74,.25)}
-.bdgMe{background:rgba(234,88,12,.1);color:var(--orange);border:1px solid rgba(234,88,12,.25)}
+.bdgMe{background:rgba(29,78,216,.1);color:#1d4ed8;border:1px solid rgba(29,78,216,.25)}
 .bdgPe{background:rgba(100,116,139,.12);color:var(--text3);border:1px solid var(--border2)}
 
 /* ── PROGRESS ── */
@@ -340,7 +340,7 @@ body{display:flex;flex-direction:column}
 .tl-leg{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text3)}
 .tl-legdot{width:10px;height:10px;border-radius:3px}
 .tl-empty{text-align:center;padding:40px;color:var(--text3);font-size:12px}
-.tl-milestone{position:absolute;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;background:var(--orange);border-radius:50%;border:2px solid var(--bg);z-index:3;cursor:default}
+.tl-milestone{position:absolute;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;background:#1d4ed8;border-radius:50%;border:2px solid var(--bg);z-index:3;cursor:default}
 
 /* ── NOTIFICATIONS ── */
 .notif-btn{position:relative;background:var(--bg3);border:1px solid var(--border2);color:var(--text3);border-radius:var(--r2);padding:6px 10px;font-size:16px;cursor:pointer;transition:all .2s;display:flex;align-items:center}
@@ -413,7 +413,7 @@ body.mobile-sim #topbar{border-radius:24px 24px 0 0}
   .mob-stcard.blue::before{background:linear-gradient(90deg,#2563eb,#3b82f6)}
   .mob-stcard.green::before{background:linear-gradient(90deg,#16a34a,#4ade80)}
   .mob-stcard.red::before{background:linear-gradient(90deg,#dc2626,#f87171)}
-  .mob-stcard.orange::before{background:linear-gradient(90deg,#ea580c,#fb923c)}
+  .mob-stcard.orange::before{background:linear-gradient(90deg,#1d4ed8,#3b82f6)}
   .mob-stcard-ico{font-size:20px;margin-bottom:6px}
   .mob-stcard-val{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;line-height:1;color:var(--text)}
   .mob-stcard-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;font-weight:600;margin-top:3px}
@@ -680,9 +680,12 @@ body.mobile-sim #topbar{border-radius:24px 24px 0 0}
 
       <!-- GALLERY -->
       <div class="page" id="pg-gallery">
-        <div class="ph"><div class="ptitle">Site Gallery</div></div>
-        <div class="pgrid" id="galGrid"></div>
-        <div class="empty" id="galEmpty"><div class="emico">🖼️</div><div class="emtxt">No photos uploaded yet</div></div>
+        <div class="ph">
+          <div><div class="ptitle">Site Gallery</div><div class="psub">Photos from task updates</div></div>
+          <label class="btn btnP" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px">📷 Upload<input type="file" id="galUpload" accept="image/*" multiple style="display:none"></label>
+        </div>
+        <div id="galGrid" class="pgrid"></div>
+        <div class="empty" id="galEmpty"><div class="emico">🖼️</div><div class="emtxt">No photos yet — upload photos here or add via task updates</div></div>
       </div>
 
       <!-- MEMBERS -->
@@ -856,6 +859,7 @@ body.mobile-sim #topbar{border-radius:24px 24px 0 0}
         <div class="fg"><label>Phone</label><input id="wkPhone" placeholder="Phone number" type="tel"></div>
         <div class="fg"><label>Daily Wage (₹)</label><input type="number" id="wkWage" placeholder="0" min="0"></div>
       </div>
+      <div class="fg"><label>Number of Workers</label><input type="number" id="wkCount" placeholder="e.g. 5 (for gang/group)" min="1" value="1"></div>
     </div>
     <div class="mftr">
       <button class="btn btnG" data-mc="mWK">Cancel</button>
@@ -1134,7 +1138,7 @@ document.querySelectorAll("[data-p]").forEach(function(el){
 
 function renderPage(p){
   populateProjSelects();
-  var fns={dashboard:renderDash,projects:renderProjects,tasks:renderTasks,material:renderMaterial,attendance:renderAtt,dailylog:renderLogs,financials:renderFin,issues:renderIssues,feed:renderFeed,gallery:renderGallery,members:renderMembers,timeline:renderTimeline};
+  var fns={dashboard:renderDash,projects:renderProjects,tasks:renderTasks,material:renderMaterial,attendance:renderAtt,dailylog:renderLogs,financials:renderFin,issues:renderIssues,feed:renderFeed,gallery:function(){renderGallery();initGalleryUpload()},members:renderMembers,timeline:renderTimeline};
   if(fns[p])fns[p]();
 }
 
@@ -1597,7 +1601,7 @@ function renderAttDaily(){
     var a=att[w.id]||{};
     return'<div class="wrow">'+
       '<div class="wav">'+w.name[0].toUpperCase()+'</div>'+
-      '<div class="winfo"><div class="wname">'+esc(w.name)+'</div><div class="wtrade">'+esc(w.trade||w.service||"")+(( w.wage||w.rate)?" · ₹"+(w.wage||w.rate)+"/day":"")+'</div></div>'+
+      '<div class="winfo"><div class="wname">'+esc(w.name)+(w.workerCount&&w.workerCount>1?' <span style="background:rgba(37,99,235,.12);color:#2563eb;font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;border:1px solid rgba(37,99,235,.2);">×'+w.workerCount+' workers</span>':'')+'</div><div class="wtrade">'+esc(w.trade||w.service||"")+(( w.wage||w.rate)?" · ₹"+(w.wage||w.rate)+"/day":"")+'</div></div>'+
       '<div class="attbtns">'+
         '<button class="abtn P'+(a.status==="P"?" sel":"")+ '" onclick="markAtt(\''+w.id+'\',\'P\')">P</button>'+
         '<button class="abtn A'+(a.status==="A"?" sel":"")+ '" onclick="markAtt(\''+w.id+'\',\'A\')">A</button>'+
@@ -1639,10 +1643,11 @@ function renderPayables(){
 
 function saveWorker(){
   var name=gv("wkName");if(!name){alert("Name required");return}
+  var count=parseInt(gv("wkCount"))||1;
   var id=uid();
-  DB.ref("workers/"+id).set({id:id,name:name,trade:gv("wkTrade")||"Other",phone:gv("wkPhone"),wage:gv("wkWage")||"0",addedAt:ts(),addedBy:CU.name},function(err){
+  DB.ref("workers/"+id).set({id:id,name:name,trade:gv("wkTrade")||"Other",phone:gv("wkPhone"),wage:gv("wkWage")||"0",workerCount:count,addedAt:ts(),addedBy:CU.name},function(err){
     if(err){alert("Save failed: "+err.message);return}
-    addFeed("added worker",name);closeM("mWK");clr("wkName","wkPhone","wkWage");sv("wkTrade","Mason");
+    addFeed("added worker",name+(count>1?" ("+count+" workers)":""));closeM("mWK");clr("wkName","wkPhone","wkWage");sv("wkTrade","Mason");sv("wkCount","1");
   });
 }
 function saveVendor(){
@@ -1921,11 +1926,52 @@ function clearFeed(){
 }
 
 function renderGallery(){
+  // Collect from gallery node
   var photos=Object.values(D.gallery).sort(function(a,b){return(b.ts||"").localeCompare(a.ts||"")});
+  // Also collect from task history photos (base64 stored there)
+  var histPhotos=[];
+  Object.values(D.tasks).forEach(function(t){
+    Object.values(t.history||{}).forEach(function(h){
+      (h.photos||[]).forEach(function(ph){
+        if(ph)histPhotos.push({url:ph,uploadedBy:h.user||"",ts:h.ts||""});
+      });
+    });
+  });
+  // Merge, deduplicate by url prefix
+  var seen={};
+  photos.forEach(function(p){if(p.url)seen[p.url.slice(0,60)]=p});
+  histPhotos.forEach(function(p){if(p.url&&!seen[p.url.slice(0,60)])seen[p.url.slice(0,60)]=p});
+  var all=Object.values(seen).sort(function(a,b){return(b.ts||"").localeCompare(a.ts||"")});
+
   var grid=document.getElementById("galGrid"),emp=document.getElementById("galEmpty");
-  if(!photos.length){grid.innerHTML="";emp.style.display="block";return}
+  if(!all.length){grid.innerHTML="";emp.style.display="block";return}
   emp.style.display="none";
-  grid.innerHTML=photos.map(function(p){return'<img src="'+p.url+'" class="pthumb" title="'+esc(p.uploadedBy)+' · '+fmtDT(p.ts)+'" onclick="window.open(\''+p.url+'\',\'_blank\')">'}).join("");
+  grid.innerHTML=all.map(function(p){
+    return'<img src="'+p.url+'" class="pthumb" title="'+(p.uploadedBy?esc(p.uploadedBy)+' · ':'')+fmtDT(p.ts)+'" onclick="window.open(\''+p.url+'\',\'_blank\')" onerror="this.style.display=\'none\'">';
+  }).join("");
+}
+
+function initGalleryUpload(){
+  var inp=document.getElementById("galUpload");
+  if(!inp||inp._wired)return;
+  inp._wired=true;
+  inp.addEventListener("change",function(){
+    var files=this.files;if(!files||!files.length)return;
+    var total=files.length,done=0;
+    Array.from(files).forEach(function(file){
+      if(file.size>800000){done++;if(done===total)renderGallery();return}
+      var r=new FileReader();
+      r.onload=function(e){
+        DB.ref("gallery").push({url:e.target.result,uploadedBy:CU.name,ts:ts()},function(){
+          addFeed("uploaded photo to gallery","");
+          done++;if(done===total)renderGallery();
+        });
+      };
+      r.onerror=function(){done++;if(done===total)renderGallery()};
+      r.readAsDataURL(file);
+    });
+    inp.value="";
+  });
 }
 
 function renderMembers(){
@@ -1964,7 +2010,7 @@ function renderTimeline(){
   var monthLabels=[];
   for(var m=0;m<months;m++){var d=new Date(rangeStart);d.setMonth(d.getMonth()+m);monthLabels.push(d.toLocaleDateString("en-IN",{month:"short",year:"2-digit"}))}
   function pct(dateStr){if(!dateStr)return null;var d=new Date(dateStr+"T00:00:00");var p=(d-rangeStart)/((rangeEnd-rangeStart));return Math.max(0,Math.min(1,p))*100}
-  var barColors={"Active":"linear-gradient(90deg,#2563eb,#3b82f6)","Completed":"linear-gradient(90deg,#16a34a,#4ade80)","On Hold":"linear-gradient(90deg,#ea580c,#fb923c)","NOT STARTED":"linear-gradient(90deg,#60a5fa,#93c5fd)","IN PROGRESS":"linear-gradient(90deg,#3b82f6,#60a5fa)","COMPLETED":"linear-gradient(90deg,#16a34a,#4ade80)"};
+  var barColors={"Active":"linear-gradient(90deg,#2563eb,#3b82f6)","Completed":"linear-gradient(90deg,#16a34a,#4ade80)","On Hold":"linear-gradient(90deg,#1d4ed8,#3b82f6)","NOT STARTED":"linear-gradient(90deg,#60a5fa,#93c5fd)","IN PROGRESS":"linear-gradient(90deg,#3b82f6,#60a5fa)","COMPLETED":"linear-gradient(90deg,#16a34a,#4ade80)"};
   var todayPct=pct(today());
   var html='<div class="tl-wrap"><div class="tl-header"><div class="tl-label-col">Project / Task</div><div class="tl-months">';
   monthLabels.forEach(function(l){html+='<div class="tl-month">'+l+'</div>'});
@@ -1987,7 +2033,7 @@ function renderTimeline(){
     });
   });
   html+='</div><div class="tl-legend">';
-  [["Active","#2563eb"],["Completed","#16a34a"],["On Hold","#ea580c"],["In Progress","#3b82f6"],["Not Started","#60a5fa"],["Today","#dc2626"]].forEach(function(lg){html+='<div class="tl-leg"><div class="tl-legdot" style="background:'+lg[1]+'"></div>'+lg[0]+'</div>'});
+  [["Active","#2563eb"],["Completed","#16a34a"],["On Hold","#1d4ed8"],["In Progress","#3b82f6"],["Not Started","#60a5fa"],["Today","#dc2626"]].forEach(function(lg){html+='<div class="tl-leg"><div class="tl-legdot" style="background:'+lg[1]+'"></div>'+lg[0]+'</div>'});
   html+='</div>';
   document.getElementById("tlContainer").innerHTML=html;
 }
