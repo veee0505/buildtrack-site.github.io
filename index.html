@@ -437,6 +437,81 @@ body.mobile-sim #topbar{border-radius:24px 24px 0 0}
   .mob-overdue-date{font-size:10px;color:var(--red)}
 }
 
+
+/* ── KANBAN ── */
+.kb-col{min-width:240px;width:240px;flex-shrink:0;background:var(--bg2);border-radius:var(--r);padding:10px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--border)}
+.kb-col-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.kb-col-title{font-family:var(--fontH);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text3)}
+.kb-col-count{font-size:10px;background:var(--bg3);color:var(--text3);padding:1px 7px;border-radius:10px;font-weight:700}
+.kb-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px;cursor:pointer;transition:all .15s;user-select:none}
+.kb-card:hover{border-color:var(--border2);box-shadow:var(--shadow);transform:translateY(-1px)}
+.kb-card-name{font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px;line-height:1.4}
+.kb-card-meta{font-size:10px;color:var(--text3);display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.kb-card-foot{display:flex;align-items:center;justify-content:space-between}
+.kb-pbar{height:3px;background:var(--bg3);border-radius:2px;flex:1;margin-right:6px}
+.kb-pfill{height:100%;background:linear-gradient(90deg,#44403c,#78716c);border-radius:2px}
+.kb-bulk-bar{display:none;background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:10px 14px;margin-bottom:12px;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;box-shadow:var(--shadow)}
+.kb-bulk-bar.show{display:flex}
+
+/* ── ANALYTICS ── */
+.an-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:18px}
+.an-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;position:relative;overflow:hidden}
+.an-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.an-card.blue::before{background:linear-gradient(90deg,var(--blue),#60a5fa)}
+.an-card.green::before{background:linear-gradient(90deg,var(--green),#4ade80)}
+.an-card.red::before{background:linear-gradient(90deg,var(--red),#f87171)}
+.an-card.orange::before{background:linear-gradient(90deg,var(--orange),#fbbf24)}
+.an-card.gold::before{background:linear-gradient(90deg,var(--gold2),var(--gold3))}
+.an-val{font-family:var(--fontH);font-size:32px;font-weight:700;color:var(--text);line-height:1}
+.an-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;font-weight:600;margin-top:4px}
+.an-sub{font-size:11px;color:var(--text3);margin-top:6px}
+.an-bar-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:12px}
+.an-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.an-bar-lbl{font-size:11px;color:var(--text);min-width:90px;font-weight:500}
+.an-bar-track{flex:1;height:8px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.an-bar-fill{height:100%;border-radius:4px;transition:width .4s}
+.an-bar-val{font-size:11px;color:var(--text3);min-width:36px;text-align:right;font-weight:600;font-family:var(--fontH)}
+.an-sec-title{font-family:var(--fontH);font-size:14px;font-weight:700;color:var(--gold2);margin-bottom:10px}
+.an-health-ring{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.an-ring{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fontH);font-size:18px;font-weight:700;flex-shrink:0}
+
+/* ── SITE OPS ── */
+.equip-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:9px;display:flex;align-items:flex-start;gap:12px}
+.equip-ico{width:40px;height:40px;border-radius:10px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.equip-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.equip-meta{font-size:11px;color:var(--text3)}
+.safety-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:9px;border-left:4px solid var(--orange)}
+.safety-card.Critical{border-left-color:var(--red)}
+.safety-card.Serious{border-left-color:var(--orange)}
+.safety-card.Minor{border-left-color:var(--green)}
+.safety-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.safety-meta{font-size:10px;color:var(--text3);margin-bottom:7px}
+.qc-item{display:flex;align-items:center;gap:10px;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:6px;cursor:pointer;transition:all .15s}
+.qc-item.done{opacity:.6;text-decoration:line-through}
+.qc-check{width:20px;height:20px;border-radius:6px;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-size:12px}
+.qc-item.done .qc-check{background:var(--green);border-color:var(--green);color:#fff}
+
+/* ── PUSH NOTIF TOAST ── */
+.pn-toast{position:fixed;top:70px;right:12px;width:300px;background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:12px 14px;box-shadow:var(--shadow);z-index:8000;display:flex;gap:10px;align-items:flex-start;animation:slideIn .25s ease;border-left:4px solid var(--gold2)}
+.pn-toast.danger{border-left-color:var(--red)}
+.pn-toast.warn{border-left-color:var(--orange)}
+.pn-toast.info{border-left-color:var(--blue)}
+@keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:none;opacity:1}}
+@keyframes slideOut{from{transform:none;opacity:1}to{transform:translateX(120%);opacity:0}}
+.pn-ico{font-size:20px;flex-shrink:0;margin-top:1px}
+.pn-body{flex:1}
+.pn-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px}
+.pn-msg{font-size:11px;color:var(--text3);line-height:1.4}
+.pn-close{font-size:14px;color:var(--text3);cursor:pointer;background:none;border:none;padding:0;flex-shrink:0;line-height:1}
+.pn-close:hover{color:var(--red)}
+
+/* ── TASK BULK SELECT ── */
+.tcard{position:relative}
+.tcard-check{position:absolute;top:12px;left:12px;width:18px;height:18px;border-radius:5px;border:2px solid var(--border2);display:none;align-items:center;justify-content:center;cursor:pointer;background:var(--card);z-index:2;font-size:10px;transition:all .15s}
+body.bulk-mode .tcard-check{display:flex}
+body.bulk-mode .tcard{padding-left:40px}
+.tcard-check.checked{background:var(--gold);border-color:var(--gold);color:#fff}
+
 @media print{
   #topbar,#sidebar,#bnav,.btn,.btnP,.btnG,.tabs,.moverlay,#loginScreen,
   .ph button, #repType, #repDur, #repDRng, #btnGenRep, .notif-panel{display:none!important}
@@ -516,6 +591,9 @@ body.mobile-sim #topbar{border-radius:24px 24px 0 0}
         <div class="ni" data-p="feed"><span class="nic">📡</span>Feed</div>
         <div class="ni" data-p="gallery"><span class="nic">🖼️</span>Gallery</div>
         <div class="ni" data-p="members"><span class="nic">👥</span>Members</div>
+        <div class="ni" data-p="kanban"><span class="nic">🗂️</span>Kanban</div>
+        <div class="ni" data-p="analytics"><span class="nic">📈</span>Analytics</div>
+        <div class="ni" data-p="siteops"><span class="nic">🔧</span>Site Ops</div>
         <div class="ni" data-p="more"><span class="nic">⋯</span>More</div>
       </div>
     </div>
@@ -569,7 +647,22 @@ body.mobile-sim #topbar{border-radius:24px 24px 0 0}
 
       <!-- TASKS -->
       <div class="page" id="pg-tasks">
-        <div class="ph"><div class="ptitle">Tasks</div><button class="btn btnP" id="btnNT">+ New Task</button></div>
+        <div class="ph">
+          <div class="ptitle">Tasks</div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btnG" id="btnBulkToggle" title="Bulk select">☑️ Bulk</button>
+            <button class="btn btnP" id="btnNT">+ New Task</button>
+          </div>
+        </div>
+        <div class="kb-bulk-bar" id="bulkBar">
+          <span id="bulkCount" style="font-size:12px;font-weight:600;color:var(--text)">0 selected</span>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="btn btnS btnSm" onclick="bulkAction('COMPLETED')">✅ Mark Done</button>
+            <button class="btn btnG btnSm" onclick="bulkAction('IN PROGRESS')">⚙️ In Progress</button>
+            <button class="btn btnG btnSm" onclick="openBulkAssign()">👤 Reassign</button>
+            <button class="btn btnD btnSm" onclick="bulkDelete()">🗑️ Delete</button>
+          </div>
+        </div>
         <div class="tabs" id="tTabs">
           <button class="tb active" data-tf="ALL">All</button>
           <button class="tb" data-tf="IN PROGRESS">In Progress</button>
@@ -683,9 +776,17 @@ body.mobile-sim #topbar{border-radius:24px 24px 0 0}
       <!-- GALLERY -->
       <div class="page" id="pg-gallery">
         <div class="ph">
-          <div><div class="ptitle">Site Gallery</div><div class="psub">Photos from task updates</div></div>
-          <label class="btn btnP" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px">📷 Upload<input type="file" id="galUpload" accept="image/*" multiple style="display:none"></label>
+          <div><div class="ptitle">Site Gallery</div><div class="psub">All site photos — synced from tasks &amp; uploads</div></div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+            <select id="galFilter" style="background:var(--bg2);border:1px solid var(--border2);color:var(--text);border-radius:var(--r2);padding:7px 10px;font-size:12px;font-family:inherit;outline:none">
+              <option value="all">All Photos</option>
+              <option value="task">From Tasks</option>
+              <option value="upload">Direct Uploads</option>
+            </select>
+            <label class="btn btnP" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px">📷 Upload<input type="file" id="galUpload" accept="image/*" multiple style="display:none"></label>
+          </div>
         </div>
+        <div id="galStats" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap"></div>
         <div id="galGrid" class="pgrid"></div>
         <div class="empty" id="galEmpty"><div class="emico">🖼️</div><div class="emtxt">No photos yet — upload photos here or add via task updates</div></div>
       </div>
@@ -708,6 +809,43 @@ body.mobile-sim #topbar{border-radius:24px 24px 0 0}
           </div>
         </div>
         <div class="card" id="tlContainer"></div>
+      </div>
+
+      <!-- KANBAN -->
+      <div class="page" id="pg-kanban">
+        <div class="ph">
+          <div><div class="ptitle">🗂️ Kanban Board</div><div class="psub">Drag-free visual task management</div></div>
+          <div style="display:flex;gap:6px">
+            <select id="kanbanProject" style="background:var(--bg2);border:1px solid var(--border2);color:var(--text);border-radius:var(--r2);padding:7px 10px;font-size:12px;font-family:inherit;outline:none"><option value="">All Projects</option></select>
+            <button class="btn btnP" onclick="document.getElementById('btnNT').click();goPage('tasks')">+ Task</button>
+          </div>
+        </div>
+        <div id="kanbanBoard" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;min-height:400px"></div>
+      </div>
+
+      <!-- ANALYTICS -->
+      <div class="page" id="pg-analytics">
+        <div class="ph"><div><div class="ptitle">📈 Analytics</div><div class="psub">Project health &amp; performance insights</div></div></div>
+        <div id="analyticsContent"></div>
+      </div>
+
+      <!-- SITE OPS -->
+      <div class="page" id="pg-siteops">
+        <div class="ph">
+          <div><div class="ptitle">🔧 Site Operations</div><div class="psub">Equipment, safety &amp; QC checklists</div></div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btnP" id="btnNEquip">+ Equipment</button>
+            <button class="btn btnG" id="btnNSafety">⚠️ Incident</button>
+          </div>
+        </div>
+        <div class="tabs" id="siteOpsTabs">
+          <button class="tb active" data-sot="equip">🔧 Equipment</button>
+          <button class="tb" data-sot="safety">🦺 Safety</button>
+          <button class="tb" data-sot="qc">✅ QC Checklist</button>
+        </div>
+        <div id="siteOpsEquip"></div>
+        <div id="siteOpsSafety" style="display:none"></div>
+        <div id="siteOpsQC" style="display:none"></div>
       </div>
 
       <!-- MORE -->
@@ -1053,7 +1191,7 @@ var USERS = {
 };
 
 var CU = null;
-var D  = {projects:{},tasks:{},workers:{},vendors:{},indents:{},dailylogs:{},expenses:{},issues:{},members:{},walletTxs:{},feedItems:{},gallery:{},attendance:{}};
+var D  = {projects:{},tasks:{},workers:{},vendors:{},indents:{},dailylogs:{},expenses:{},issues:{},members:{},walletTxs:{},feedItems:{},gallery:{},attendance:{},equipment:{},safetyIncidents:{}};
 var curPage="dashboard",tFilter="ALL",pjFilter="all",issFilter="all",matTab="proc",attTab="daily",finTab="wallet",activeTask=null,selWeather="Sunny";
 
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
@@ -1120,9 +1258,10 @@ function startDBListener(){
     D.vendors=d.vendors||{};D.indents=d.indents||{};D.dailylogs=d.dailylogs||{};
     D.expenses=d.expenses||{};D.issues=d.issues||{};D.members=d.members||{};
     D.walletTxs=d.walletTxs||{};D.feedItems=d.feedItems||{};
-    D.gallery=d.gallery||{};D.attendance=d.attendance||{};
+    D.gallery=d.gallery||{};D.attendance=d.attendance||{};D.equipment=d.equipment||{};D.safetyIncidents=d.safetyIncidents||{};
     document.getElementById("liveBadge").style.display="flex";
     renderPage(curPage);refreshNotifs();
+    if(!_pnRan){_pnRan=true;setTimeout(checkPushNotifications,2000)}
   },function(){document.getElementById("liveBadge").style.display="none"});
 }
 
@@ -1140,7 +1279,7 @@ document.querySelectorAll("[data-p]").forEach(function(el){
 
 function renderPage(p){
   populateProjSelects();
-  var fns={dashboard:renderDash,projects:renderProjects,tasks:renderTasks,material:renderMaterial,attendance:renderAtt,dailylog:renderLogs,financials:renderFin,issues:renderIssues,feed:renderFeed,gallery:function(){renderGallery();initGalleryUpload()},members:renderMembers,timeline:renderTimeline};
+  var fns={dashboard:renderDash,projects:renderProjects,tasks:renderTasks,material:renderMaterial,attendance:renderAtt,dailylog:renderLogs,financials:renderFin,issues:renderIssues,feed:renderFeed,gallery:function(){renderGallery();initGalleryUpload()},members:renderMembers,timeline:renderTimeline,kanban:renderKanban,analytics:renderAnalytics,siteops:renderSiteOps};
   if(fns[p])fns[p]();
 }
 
@@ -1256,6 +1395,13 @@ function wireAll(){
   document.getElementById("btnSvMB").addEventListener("click",saveMember);
   document.getElementById("tlRange").addEventListener("change",function(){if(curPage==="timeline")renderTimeline()});
   document.getElementById("btnSvSH").addEventListener("click",saveShift);
+  document.getElementById("btnBulkToggle").addEventListener("click",toggleBulkMode);
+  document.getElementById("btnNEquip").addEventListener("click",function(){sv("eqLastService",today());openM("mEQ")});
+  document.getElementById("btnSvEQ").addEventListener("click",saveEquipment);
+  document.getElementById("btnNSafety").addEventListener("click",function(){sv("siDate",today());openM("mSI")});
+  document.getElementById("btnSvSI").addEventListener("click",saveSafetyIncident);
+  var gf=document.getElementById("galFilter");
+  if(gf&&!gf._wired){gf._wired=true;gf.addEventListener("change",function(){galFilterMode=this.value;renderGallery()})}
 }
 
 function buildMoreGrid(){
@@ -1265,6 +1411,8 @@ function buildMoreGrid(){
     {ico:"👥",lbl:"Members",p:"members"},{ico:"📝",lbl:"Daily Log",p:"dailylog"},
     {ico:"📋",lbl:"Reports",p:"report"},{ico:"📅",lbl:"Timeline",p:"timeline"},
     {ico:"⏰",lbl:"Shift",m:"mSH"},{ico:"🏢",lbl:"Projects",p:"projects"},
+    {ico:"🗂️",lbl:"Kanban",p:"kanban"},{ico:"📈",lbl:"Analytics",p:"analytics"},
+    {ico:"🔧",lbl:"Site Ops",p:"siteops"},
   ];
   document.getElementById("moreGrid").innerHTML=items.map(function(it,i){
     return'<div class="mitem" data-mi="'+i+'"><div class="mico">'+it.ico+'</div><div class="mlbl">'+it.lbl+'</div></div>';
@@ -1939,13 +2087,25 @@ function renderGallery(){
     });
   });
   var seen={};
-  photos.forEach(function(p){if(p.url)seen[p.url.slice(0,60)]=p});
-  histPhotos.forEach(function(p){if(p.url&&!seen[p.url.slice(0,60)])seen[p.url.slice(0,60)]=p});
+  if(galFilterMode!=="task")photos.forEach(function(p){if(p.url)seen[p.url.slice(0,60)]=p});
+  if(galFilterMode!=="upload")histPhotos.forEach(function(p){if(p.url&&!seen[p.url.slice(0,60)])seen[p.url.slice(0,60)]=p});
   var all=Object.values(seen).sort(function(a,b){return(b.ts||"").localeCompare(a.ts||"")});
 
   var grid=document.getElementById("galGrid"),emp=document.getElementById("galEmpty");
   if(!all.length){grid.innerHTML="";emp.style.display="block";return}
   emp.style.display="none";
+
+  // Render stats bar
+  var statsEl=document.getElementById("galStats");
+  if(statsEl){
+    var taskPhotoCount=histPhotos.length;
+    var uploadCount=Object.values(D.gallery).length;
+    statsEl.innerHTML=[
+      {ico:"🖼️",val:all.length,lbl:"Total"},
+      {ico:"📋",val:taskPhotoCount,lbl:"From Tasks"},
+      {ico:"📤",val:uploadCount,lbl:"Uploaded"},
+    ].map(function(s){return'<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">'+s.ico+'</span><div><div style="font-family:var(--fontH);font-size:16px;font-weight:700;color:var(--text)">'+s.val+'</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;font-weight:600">'+s.lbl+'</div></div></div>'}).join("");
+  }
 
   if(!document.getElementById("galLightbox")){
     var lb=document.createElement("div");
@@ -2146,6 +2306,480 @@ function saveShift(){
     addFeed("updated shift timing","");closeM("mSH");
   });
 }
+
+// ═══════════════════════════════════════════════
+// PUSH NOTIFICATIONS
+// ═══════════════════════════════════════════════
+var _pnQueue=[];var _pnActive=false;
+function showPushNotif(type,title,msg){
+  var toast=document.createElement("div");
+  toast.className="pn-toast "+type;
+  var ico=type==="danger"?"🚨":type==="warn"?"⚠️":"ℹ️";
+  toast.innerHTML='<span class="pn-ico">'+ico+'</span><div class="pn-body"><div class="pn-title">'+esc(title)+'</div><div class="pn-msg">'+esc(msg)+'</div></div><button class="pn-close" onclick="this.parentElement.remove()">✕</button>';
+  document.body.appendChild(toast);
+  setTimeout(function(){
+    toast.style.animation="slideOut .3s ease forwards";
+    setTimeout(function(){toast.remove()},300);
+  },5000);
+}
+
+function checkPushNotifications(){
+  var td=today();
+  var tasks=Object.values(D.tasks);
+  var overdue=tasks.filter(function(t){return t.dueDate&&t.dueDate<td&&t.status!=="COMPLETED"});
+  var dueToday=tasks.filter(function(t){return t.dueDate===td&&t.status!=="COMPLETED"});
+  var pendingIndents=Object.values(D.indents).filter(function(i){return i.status==="Pending"});
+  var critIssues=Object.values(D.issues).filter(function(i){return i.priority==="High"&&i.status==="Open"});
+
+  if(overdue.length)showPushNotif("danger","Overdue Tasks",overdue.length+" task(s) are past due date");
+  if(dueToday.length)showPushNotif("warn","Due Today",dueToday.length+" task(s) due today");
+  if(pendingIndents.length)showPushNotif("info","Indent Approval",pendingIndents.length+" indent(s) awaiting approval");
+  if(critIssues.length)showPushNotif("danger","Critical Issues",critIssues.length+" high-priority open issue(s)");
+
+  // Weather alert simulation
+  var hr=new Date().getHours();
+  if(hr>=6&&hr<=8)showPushNotif("info","Weather Update","Partly cloudy, 28°C — Suitable for outdoor work");
+}
+
+var _pnRan=false;
+
+// ═══════════════════════════════════════════════
+// KANBAN BOARD
+// ═══════════════════════════════════════════════
+function renderKanban(){
+  var projFilter=document.getElementById("kanbanProject")?document.getElementById("kanbanProject").value:"";
+  var all=Object.values(D.tasks);
+  if(projFilter)all=all.filter(function(t){return t.projectId===projFilter});
+  var cols=[
+    {key:"NOT STARTED",label:"Not Started",color:"#a8a29e",emoji:"📋"},
+    {key:"IN PROGRESS",label:"In Progress",color:"#1d4ed8",emoji:"⚙️"},
+    {key:"COMPLETED",label:"Completed",color:"#16a34a",emoji:"✅"},
+  ];
+  var board=document.getElementById("kanbanBoard");
+  board.innerHTML=cols.map(function(col){
+    var cards=all.filter(function(t){return(t.status||"NOT STARTED")===col.key});
+    var cardsHtml=cards.map(function(t){
+      var pct=t.progress||0;
+      var projName=(D.projects[t.projectId]||{}).name||"";
+      var overdue=t.dueDate&&t.dueDate<today()&&t.status!=="COMPLETED";
+      return'<div class="kb-card" onclick="openTaskUpdate(''+t.id+'')" style="'+(overdue?"border-left:3px solid var(--red)":"")+'">'+
+        '<div class="kb-card-name">'+esc(t.name)+'</div>'+
+        '<div class="kb-card-meta">'+
+          (projName?'<span>🏢 '+esc(projName.slice(0,14))+'</span>':"")+
+          (t.assignee?'<span>👤 '+esc(t.assignee)+'</span>':"")+
+          (t.dueDate?'<span style="color:'+(overdue?"var(--red)":"var(--text3)")+'">📅 '+fmtDate(t.dueDate)+'</span>':"")+
+          (t.blocker?'<span style="color:var(--red)">🚫</span>':"")+
+        '</div>'+
+        '<div class="kb-card-foot">'+
+          '<div class="kb-pbar"><div class="kb-pfill" style="width:'+pct+'%"></div></div>'+
+          '<span style="font-size:10px;font-weight:700;color:var(--gold2);font-family:var(--fontH)">'+pct+'%</span>'+
+        '</div>'+
+      '</div>';
+    }).join("");
+    return'<div class="kb-col">'+
+      '<div class="kb-col-hdr">'+
+        '<span class="kb-col-title" style="color:'+col.color+'">'+col.emoji+' '+col.label+'</span>'+
+        '<span class="kb-col-count">'+cards.length+'</span>'+
+      '</div>'+
+      (cardsHtml||'<div style="color:var(--text3);font-size:11px;text-align:center;padding:14px 0;opacity:.6">No tasks</div>')+
+    '</div>';
+  }).join("");
+  // Wire kanban project filter
+  var kpSel=document.getElementById("kanbanProject");
+  if(kpSel){
+    var prev=kpSel.value;
+    kpSel.innerHTML='<option value="">All Projects</option>'+
+      Object.values(D.projects).map(function(p){return'<option value="'+esc(p.id)+'">'+esc(p.name)+'</option>'}).join("");
+    if(prev)kpSel.value=prev;
+    if(!kpSel._wired){kpSel._wired=true;kpSel.addEventListener("change",renderKanban)}
+  }
+}
+
+// ═══════════════════════════════════════════════
+// BULK TASK ACTIONS
+// ═══════════════════════════════════════════════
+var _bulkMode=false;var _selectedTasks={};
+
+function toggleBulkMode(){
+  _bulkMode=!_bulkMode;
+  _selectedTasks={};
+  document.body.classList.toggle("bulk-mode",_bulkMode);
+  document.getElementById("bulkBar").classList.toggle("show",_bulkMode);
+  var btn=document.getElementById("btnBulkToggle");
+  btn.textContent=_bulkMode?"✕ Cancel":"☑️ Bulk";
+  btn.className=_bulkMode?"btn btnD":"btn btnG";
+  updateBulkCount();
+  renderTasks();
+}
+
+function toggleTaskSelect(id){
+  if(_selectedTasks[id])delete _selectedTasks[id];else _selectedTasks[id]=true;
+  updateBulkCount();
+  var check=document.querySelector(".tcard-check[data-tid='"+id+"']");
+  if(check)check.classList.toggle("checked",!!_selectedTasks[id]);
+}
+
+function updateBulkCount(){
+  var n=Object.keys(_selectedTasks).length;
+  var el=document.getElementById("bulkCount");
+  if(el)el.textContent=n+" selected";
+}
+
+function bulkAction(status){
+  var ids=Object.keys(_selectedTasks);
+  if(!ids.length){alert("Select at least one task");return}
+  if(!confirm("Set "+ids.length+" task(s) to "+status+"?"))return;
+  var updates={};
+  ids.forEach(function(id){
+    updates["tasks/"+id+"/status"]=status;
+    if(status==="COMPLETED")updates["tasks/"+id+"/progress"]=100;
+  });
+  DB.ref("/").update(updates,function(err){
+    if(err){alert("Update failed: "+err.message);return}
+    addFeed("bulk updated "+ids.length+" tasks","→ "+status);
+    _selectedTasks={};updateBulkCount();
+  });
+}
+
+function openBulkAssign(){
+  var ids=Object.keys(_selectedTasks);
+  if(!ids.length){alert("Select at least one task");return}
+  var name=(prompt("Reassign "+ids.length+" task(s) to:")||"").trim();
+  if(!name)return;
+  var updates={};
+  ids.forEach(function(id){updates["tasks/"+id+"/assignee"]=name});
+  DB.ref("/").update(updates,function(err){
+    if(err){alert("Update failed: "+err.message);return}
+    addFeed("bulk reassigned "+ids.length+" tasks","→ "+name);
+    _selectedTasks={};updateBulkCount();
+  });
+}
+
+function bulkDelete(){
+  var ids=Object.keys(_selectedTasks);
+  if(!ids.length){alert("Select at least one task");return}
+  if(!confirm("Delete "+ids.length+" task(s)? This cannot be undone."))return;
+  var p=Promise.resolve();
+  ids.forEach(function(id){p=p.then(function(){return DB.ref("tasks/"+id).remove()})});
+  p.then(function(){addFeed("bulk deleted "+ids.length+" tasks","");_selectedTasks={};updateBulkCount()});
+}
+
+// ═══════════════════════════════════════════════
+// ANALYTICS
+// ═══════════════════════════════════════════════
+function renderAnalytics(){
+  var tasks=Object.values(D.tasks);
+  var projs=Object.values(D.projects);
+  var issues=Object.values(D.issues);
+  var td=today();
+
+  var total=tasks.length,done=tasks.filter(function(t){return t.status==="COMPLETED"}).length;
+  var inProg=tasks.filter(function(t){return t.status==="IN PROGRESS"}).length;
+  var overdue=tasks.filter(function(t){return t.dueDate&&t.dueDate<td&&t.status!=="COMPLETED"}).length;
+  var completionRate=total?Math.round(done/total*100):0;
+  var avgProgress=total?Math.round(tasks.reduce(function(s,t){return s+(t.progress||0)},0)/total):0;
+  var openIssues=issues.filter(function(i){return i.status==="Open"}).length;
+  var highPri=issues.filter(function(i){return i.priority==="High"&&i.status==="Open"}).length;
+  var team=Object.values(D.workers).length+Object.values(D.members).length;
+  var budget=projs.reduce(function(s,p){return s+Number(p.budget||0)},0);
+  var spent=Object.values(D.expenses).reduce(function(s,e){return s+Number(e.amount||0)},0);
+  var budgetUsed=budget?Math.round(spent/budget*100):0;
+
+  // Health score calculation (0-100)
+  var healthScore=Math.max(0,Math.min(100,
+    completionRate*0.4 + (100-Math.min(100,overdue*10))*0.3 + (100-Math.min(100,highPri*20))*0.2 + (budgetUsed<=100?100-Math.max(0,budgetUsed-80):0)*0.1
+  ));
+  var healthColor=healthScore>=70?"var(--green)":healthScore>=40?"var(--orange)":"var(--red)";
+  var healthLabel=healthScore>=70?"Healthy":healthScore>=40?"At Risk":"Critical";
+
+  var el=document.getElementById("analyticsContent");
+
+  var html='<div style="display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px">';
+  html+='<div class="an-ring" style="background:conic-gradient('+healthColor+' '+Math.round(healthScore*3.6)+'deg,var(--bg3) '+Math.round(healthScore*3.6)+'deg);box-shadow:0 0 0 4px var(--bg2)">'+
+    '<div style="width:60px;height:60px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:'+healthColor+';font-family:var(--fontH)">'+Math.round(healthScore)+'</div></div>';
+  html+='<div><div style="font-family:var(--fontH);font-size:18px;font-weight:700;color:'+healthColor+'">'+healthLabel+'</div><div style="font-size:11px;color:var(--text3);margin-top:2px">Overall Project Health Score</div><div style="font-size:10px;color:var(--text3);margin-top:4px">Based on task completion, issues, budget & overdue rate</div></div></div>';
+
+  html+='<div class="an-grid">';
+  [
+    {c:"gold",val:total,lbl:"Total Tasks",sub:done+" completed"},
+    {c:"green",val:completionRate+"%",lbl:"Completion Rate",sub:done+" of "+total+" done"},
+    {c:"blue",val:avgProgress+"%",lbl:"Avg Progress",sub:"Across all tasks"},
+    {c:"red",val:overdue,lbl:"Overdue Tasks",sub:"Need attention"},
+    {c:"orange",val:openIssues,lbl:"Open Issues",sub:highPri+" high priority"},
+    {c:"gold",val:team,lbl:"Team Size",sub:"Workers + Members"},
+    {c:"green",val:inr(budget),lbl:"Total Budget",sub:"All projects"},
+    {c:"red",val:budgetUsed+"%",lbl:"Budget Used",sub:inr(spent)+" spent"},
+  ].forEach(function(s){
+    html+='<div class="an-card '+s.c+'"><div class="an-val">'+s.val+'</div><div class="an-lbl">'+s.lbl+'</div><div class="an-sub">'+s.sub+'</div></div>';
+  });
+  html+='</div>';
+
+  // Task breakdown by status bar chart
+  if(total){
+    html+='<div class="an-bar-wrap"><div class="an-sec-title">📊 Task Status Breakdown</div>';
+    [
+      {lbl:"Completed",val:done,total:total,color:"var(--green)"},
+      {lbl:"In Progress",val:inProg,total:total,color:"var(--blue)"},
+      {lbl:"Not Started",val:total-done-inProg,total:total,color:"var(--gold3)"},
+      {lbl:"Overdue",val:overdue,total:total,color:"var(--red)"},
+    ].forEach(function(r){
+      var pct=r.total?Math.round(r.val/r.total*100):0;
+      html+='<div class="an-bar-row">'+
+        '<span class="an-bar-lbl">'+r.lbl+'</span>'+
+        '<div class="an-bar-track"><div class="an-bar-fill" style="width:'+pct+'%;background:'+r.color+'"></div></div>'+
+        '<span class="an-bar-val">'+r.val+'</span>'+
+      '</div>';
+    });
+    html+='</div>';
+  }
+
+  // Project health bars
+  if(projs.length){
+    html+='<div class="an-bar-wrap"><div class="an-sec-title">🏢 Project Progress</div>';
+    projs.forEach(function(p){
+      var pTasks=tasks.filter(function(t){return t.projectId===p.id});
+      var pDone=pTasks.filter(function(t){return t.status==="COMPLETED"}).length;
+      var pPct=pTasks.length?Math.round(pDone/pTasks.length*100):(p.progress||0);
+      var overP=projs.reduce(function(s,x){return s+Number(x.budget||0)},0);
+      var spentP=Object.values(D.expenses).filter(function(e){return e.projectId===p.id}).reduce(function(s,e){return s+Number(e.amount||0)},0);
+      html+='<div class="an-bar-row">'+
+        '<span class="an-bar-lbl" title="'+esc(p.name)+'">'+esc(p.name.slice(0,12))+'</span>'+
+        '<div class="an-bar-track"><div class="an-bar-fill" style="width:'+pPct+'%;background:linear-gradient(90deg,#44403c,#78716c)"></div></div>'+
+        '<span class="an-bar-val">'+pPct+'%</span>'+
+      '</div>';
+    });
+    html+='</div>';
+  }
+
+  // Category breakdown
+  var cats={};
+  tasks.forEach(function(t){var c=t.category||"Other";if(!cats[c])cats[c]={total:0,done:0};cats[c].total++;if(t.status==="COMPLETED")cats[c].done++});
+  if(Object.keys(cats).length){
+    html+='<div class="an-bar-wrap"><div class="an-sec-title">🏗️ Tasks by Category</div>';
+    Object.keys(cats).sort().forEach(function(c){
+      var r=cats[c];var pct=Math.round(r.done/r.total*100);
+      html+='<div class="an-bar-row">'+
+        '<span class="an-bar-lbl">'+esc(c)+'</span>'+
+        '<div class="an-bar-track"><div class="an-bar-fill" style="width:'+pct+'%;background:var(--gold2)"></div></div>'+
+        '<span class="an-bar-val">'+r.done+'/'+r.total+'</span>'+
+      '</div>';
+    });
+    html+='</div>';
+  }
+
+  el.innerHTML=html;
+}
+
+// ═══════════════════════════════════════════════
+// SITE OPERATIONS
+// ═══════════════════════════════════════════════
+var siteOpsTab="equip";
+var QC_ITEMS=[
+  "Safety helmet worn by all workers","Safety harness used at height","Fire extinguisher accessible",
+  "First aid kit on site","Work area marked and barricaded","No loose materials at edges",
+  "Electrical connections inspected","Scaffolding load checked","Signage visible and correct",
+  "PPE compliance verified","Daily toolbox talk conducted","Site clean and organised"
+];
+var qcState=(function(){try{var s=sessionStorage.getItem("btQC");return s?JSON.parse(s):{}}catch(e){return{}}})();
+
+function renderSiteOps(){
+  // Wire tabs
+  document.querySelectorAll("#siteOpsTabs .tb").forEach(function(b){
+    if(!b._wired){b._wired=true;b.addEventListener("click",function(){
+      siteOpsTab=this.dataset.sot;
+      document.querySelectorAll("#siteOpsTabs .tb").forEach(function(x){x.classList.remove("active")});
+      this.classList.add("active");
+      ["siteOpsEquip","siteOpsSafety","siteOpsQC"].forEach(function(id){document.getElementById(id).style.display="none"});
+      var map={equip:"siteOpsEquip",safety:"siteOpsSafety",qc:"siteOpsQC"};
+      document.getElementById(map[siteOpsTab]).style.display="block";
+      renderSiteOpsTab();
+    })}
+  });
+  // Show current tab
+  ["siteOpsEquip","siteOpsSafety","siteOpsQC"].forEach(function(id){document.getElementById(id).style.display="none"});
+  var map={equip:"siteOpsEquip",safety:"siteOpsSafety",qc:"siteOpsQC"};
+  document.getElementById(map[siteOpsTab]).style.display="block";
+  renderSiteOpsTab();
+}
+
+function renderSiteOpsTab(){
+  if(siteOpsTab==="equip")renderEquipment();
+  else if(siteOpsTab==="safety")renderSafetyIncidents();
+  else renderQC();
+}
+
+function renderEquipment(){
+  var list=Object.values(D.equipment).sort(function(a,b){return(b.createdAt||"").localeCompare(a.createdAt||"")});
+  var el=document.getElementById("siteOpsEquip");
+  if(!list.length){el.innerHTML='<div class="empty"><div class="emico">🔧</div><div class="emtxt">No equipment tracked yet</div></div>';return}
+  var statusIco={Available:"🟢","In Use":"🔵","Under Maintenance":"🟡","Out of Service":"🔴"};
+  var statusColor={Available:"var(--green)","In Use":"var(--blue)","Under Maintenance":"var(--orange)","Out of Service":"var(--red)"};
+  el.innerHTML=list.map(function(e){
+    var typeIco={Machinery:"⚙️",Vehicle:"🚛",Tool:"🔨",Scaffold:"🏗️","Safety Gear":"🦺",Other:"📦"};
+    var ico=typeIco[e.type]||"📦";
+    var sc=statusColor[e.status]||"var(--text3)";
+    return'<div class="equip-card">'+
+      '<div class="equip-ico">'+ico+'</div>'+
+      '<div style="flex:1">'+
+        '<div class="equip-name">'+esc(e.name)+'</div>'+
+        '<div class="equip-meta">'+esc(e.type)+(e.assigned?" · "+esc(e.assigned):"")+'</div>'+
+        (e.lastService?'<div class="equip-meta" style="margin-top:2px">Last: '+fmtDate(e.lastService)+(e.nextService?" · Next: "+fmtDate(e.nextService):"")+'</div>':"")+
+        (e.notes?'<div class="equip-meta" style="margin-top:3px;font-style:italic">'+esc(e.notes)+'</div>':"")+
+      '</div>'+
+      '<div style="text-align:right;flex-shrink:0">'+
+        '<div style="font-size:11px;font-weight:700;color:'+sc+'">'+esc(e.status||"Available")+'</div>'+
+        '<button class="btn btnD btnSm" style="margin-top:6px" onclick="deleteEquipment(''+e.id+'')">Remove</button>'+
+      '</div>'+
+    '</div>';
+  }).join("");
+}
+
+function saveEquipment(){
+  var name=gv("eqName");if(!name){alert("Name required");return}
+  var id=uid();
+  DB.ref("equipment/"+id).set({id:id,name:name,type:gv("eqType")||"Other",assigned:gv("eqAssigned"),status:gv("eqStatus")||"Available",lastService:gv("eqLastService"),nextService:gv("eqNextService"),notes:gv("eqNotes"),createdAt:ts(),addedBy:CU.name},function(err){
+    if(err){alert("Save failed: "+err.message);return}
+    addFeed("added equipment",name);closeM("mEQ");clr("eqName","eqAssigned","eqNotes");
+    // Check if next service is soon and notify
+    var ns=gv("eqNextService");
+    if(ns){var diff=(new Date(ns)-new Date())/(1000*60*60*24);if(diff<=7)showPushNotif("warn","Service Due Soon",name+" is due for service within 7 days")}
+  });
+}
+
+function deleteEquipment(id){if(confirm("Remove this equipment?"))DB.ref("equipment/"+id).remove()}
+
+function renderSafetyIncidents(){
+  var list=Object.values(D.safetyIncidents).sort(function(a,b){return(b.ts||"").localeCompare(a.ts||"")});
+  var el=document.getElementById("siteOpsSafety");
+  if(!list.length){el.innerHTML='<div class="empty"><div class="emico">🦺</div><div class="emtxt">No safety incidents logged — keep it that way!</div></div>';return}
+  el.innerHTML=list.map(function(i){
+    var sevColor={Minor:"var(--green)",Moderate:"var(--orange)",Serious:"var(--orange)",Critical:"var(--red)"};
+    return'<div class="safety-card '+esc(i.severity)+'">'+
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">'+
+        '<div><div class="safety-title">'+esc(i.title)+'</div><div class="safety-meta">'+fmtDate(i.date)+(i.location?" · "+esc(i.location):"")+(i.person?" · "+esc(i.person):"")+'</div></div>'+
+        '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">'+
+          '<span class="bdg" style="background:rgba(220,38,38,.08);color:'+sevColor[i.severity||"Minor"]+';border-color:'+sevColor[i.severity||"Minor"]+'">'+esc(i.severity||"Minor")+'</span>'+
+          '<button class="btn btnD btnSm" onclick="deleteSafetyIncident(''+i.id+'')">Delete</button>'+
+        '</div>'+
+      '</div>'+
+      (i.desc?'<div style="font-size:12px;color:var(--text);margin-top:7px;line-height:1.5">'+esc(i.desc)+'</div>':"")+
+      (i.action?'<div style="font-size:11px;color:var(--green);margin-top:5px;font-weight:500">✅ Action: '+esc(i.action)+'</div>':"")+
+    '</div>';
+  }).join("");
+}
+
+function saveSafetyIncident(){
+  var title=gv("siTitle");if(!title){alert("Title required");return}
+  var id=uid();
+  var sev=gv("siSeverity")||"Minor";
+  DB.ref("safetyIncidents/"+id).set({id:id,title:title,severity:sev,date:gv("siDate")||today(),location:gv("siLocation"),person:gv("siPerson"),desc:gv("siDesc"),action:gv("siAction"),ts:ts(),loggedBy:CU.name},function(err){
+    if(err){alert("Save failed: "+err.message);return}
+    addFeed("logged safety incident",title);
+    if(sev==="Critical"||sev==="Serious")showPushNotif("danger","Safety Alert","New "+sev+" incident: "+title);
+    closeM("mSI");clr("siTitle","siLocation","siPerson","siDesc","siAction");sv("siDate",today());sv("siSeverity","Minor");
+  });
+}
+
+function deleteSafetyIncident(id){if(confirm("Delete this safety incident record?"))DB.ref("safetyIncidents/"+id).remove()}
+
+function renderQC(){
+  var el=document.getElementById("siteOpsQC");
+  var total=QC_ITEMS.length;
+  var done=QC_ITEMS.filter(function(q){return qcState[q]}).length;
+  var pct=Math.round(done/total*100);
+  el.innerHTML='<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:12px">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'+
+      '<div style="font-family:var(--fontH);font-size:14px;font-weight:700;color:var(--gold2)">Daily Safety QC Checklist</div>'+
+      '<div style="font-family:var(--fontH);font-size:16px;font-weight:700;color:'+(pct>=80?"var(--green)":pct>=50?"var(--orange)":"var(--red)")+'">'+pct+'%</div>'+
+    '</div>'+
+    '<div class="pbar" style="height:6px;margin-bottom:12px"><div class="pfill" style="width:'+pct+'%"></div></div>'+
+    QC_ITEMS.map(function(q){
+      var checked=!!qcState[q];
+      return'<div class="qc-item'+(checked?" done":"")+'" onclick="toggleQC(''+q.replace(/'/g,"\'")+'')" >'+
+        '<div class="qc-check'+(checked?" checked":"")+'">'+( checked?"✓":"")+'</div>'+
+        '<span style="font-size:12px;font-weight:500">'+esc(q)+'</span>'+
+      '</div>';
+    }).join("")+
+    '<div style="margin-top:10px;display:flex;gap:7px">'+
+      '<button class="btn btnS btnSm" onclick="setAllQC(true)">✅ Check All</button>'+
+      '<button class="btn btnG btnSm" onclick="setAllQC(false)">↩ Reset</button>'+
+    '</div>'+
+  '</div>';
+}
+
+function toggleQC(item){
+  qcState[item]=!qcState[item];
+  try{sessionStorage.setItem("btQC",JSON.stringify(qcState))}catch(e){}
+  renderQC();
+}
+
+function setAllQC(val){
+  QC_ITEMS.forEach(function(q){qcState[q]=val});
+  try{sessionStorage.setItem("btQC",JSON.stringify(qcState))}catch(e){}
+  renderQC();
+}
+
+// ═══════════════════════════════════════════════
+// ENHANCED GALLERY
+// ═══════════════════════════════════════════════
+var galFilterMode="all";
+
 </script>
+
+<!-- EQUIPMENT MODAL -->
+<div class="moverlay" id="mEQ">
+  <div class="modal">
+    <div class="mhdr"><span class="mtitle">Add Equipment</span><button class="mclose" data-mc="mEQ">✕</button></div>
+    <div class="mbody">
+      <div class="frow">
+        <div class="fg"><label>Equipment Name *</label><input id="eqName" placeholder="e.g. Concrete Mixer"></div>
+        <div class="fg"><label>Type</label>
+          <select id="eqType"><option>Machinery</option><option>Vehicle</option><option>Tool</option><option>Scaffold</option><option>Safety Gear</option><option>Other</option></select>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>Assigned To</label><input id="eqAssigned" placeholder="Worker / Project"></div>
+        <div class="fg"><label>Status</label>
+          <select id="eqStatus"><option>Available</option><option>In Use</option><option>Under Maintenance</option><option>Out of Service</option></select>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>Last Service Date</label><input type="date" id="eqLastService"></div>
+        <div class="fg"><label>Next Service Due</label><input type="date" id="eqNextService"></div>
+      </div>
+      <div class="fg"><label>Notes</label><textarea id="eqNotes" placeholder="Equipment condition, location..."></textarea></div>
+    </div>
+    <div class="mftr">
+      <button class="btn btnG" data-mc="mEQ">Cancel</button>
+      <button class="btn btnP" id="btnSvEQ">Save Equipment</button>
+    </div>
+  </div>
+</div>
+
+<!-- SAFETY INCIDENT MODAL -->
+<div class="moverlay" id="mSI">
+  <div class="modal">
+    <div class="mhdr"><span class="mtitle">Log Safety Incident</span><button class="mclose" data-mc="mSI">✕</button></div>
+    <div class="mbody">
+      <div class="frow">
+        <div class="fg"><label>Incident Title *</label><input id="siTitle" placeholder="Brief description"></div>
+        <div class="fg"><label>Severity</label>
+          <select id="siSeverity"><option>Minor</option><option>Moderate</option><option>Serious</option><option>Critical</option></select>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>Date</label><input type="date" id="siDate"></div>
+        <div class="fg"><label>Location on Site</label><input id="siLocation" placeholder="Zone / Floor"></div>
+      </div>
+      <div class="fg"><label>Involved Person(s)</label><input id="siPerson" placeholder="Name(s)"></div>
+      <div class="fg"><label>Description</label><textarea id="siDesc" placeholder="What happened, root cause..."></textarea></div>
+      <div class="fg"><label>Corrective Action Taken</label><textarea id="siAction" placeholder="Steps taken to prevent recurrence..."></textarea></div>
+    </div>
+    <div class="mftr">
+      <button class="btn btnG" data-mc="mSI">Cancel</button>
+      <button class="btn btnP" id="btnSvSI">Log Incident</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
