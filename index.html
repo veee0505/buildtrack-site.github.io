@@ -2353,38 +2353,47 @@ function renderKanban(){
   var cols=[
     {key:"NOT STARTED",label:"Not Started",color:"#a8a29e",emoji:"📋"},
     {key:"IN PROGRESS",label:"In Progress",color:"#1d4ed8",emoji:"⚙️"},
-    {key:"COMPLETED",label:"Completed",color:"#16a34a",emoji:"✅"},
+    {key:"COMPLETED",label:"Completed",color:"#16a34a",emoji:"✅"}
   ];
   var board=document.getElementById("kanbanBoard");
-  board.innerHTML=cols.map(function(col){
+  board.innerHTML="";
+  cols.forEach(function(col){
     var cards=all.filter(function(t){return(t.status||"NOT STARTED")===col.key});
-    var cardsHtml=cards.map(function(t){
-      var pct=t.progress||0;
-      var projName=(D.projects[t.projectId]||{}).name||"";
-      var overdue=t.dueDate&&t.dueDate<today()&&t.status!=="COMPLETED";
-      return'<div class="kb-card" onclick="openTaskUpdate(''+t.id+'')" style="'+(overdue?"border-left:3px solid var(--red)":"")+'">'+
-        '<div class="kb-card-name">'+esc(t.name)+'</div>'+
-        '<div class="kb-card-meta">'+
-          (projName?'<span>🏢 '+esc(projName.slice(0,14))+'</span>':"")+
-          (t.assignee?'<span>👤 '+esc(t.assignee)+'</span>':"")+
-          (t.dueDate?'<span style="color:'+(overdue?"var(--red)":"var(--text3)")+'">📅 '+fmtDate(t.dueDate)+'</span>':"")+
-          (t.blocker?'<span style="color:var(--red)">🚫</span>':"")+
-        '</div>'+
-        '<div class="kb-card-foot">'+
-          '<div class="kb-pbar"><div class="kb-pfill" style="width:'+pct+'%"></div></div>'+
-          '<span style="font-size:10px;font-weight:700;color:var(--gold2);font-family:var(--fontH)">'+pct+'%</span>'+
-        '</div>'+
-      '</div>';
-    }).join("");
-    return'<div class="kb-col">'+
-      '<div class="kb-col-hdr">'+
-        '<span class="kb-col-title" style="color:'+col.color+'">'+col.emoji+' '+col.label+'</span>'+
-        '<span class="kb-col-count">'+cards.length+'</span>'+
-      '</div>'+
-      (cardsHtml||'<div style="color:var(--text3);font-size:11px;text-align:center;padding:14px 0;opacity:.6">No tasks</div>')+
-    '</div>';
-  }).join("");
-  // Wire kanban project filter
+    var colEl=document.createElement("div");
+    colEl.className="kb-col";
+    var hdr='<div class="kb-col-hdr"><span class="kb-col-title" style="color:'+col.color+'">'+col.emoji+" "+col.label+'</span><span class="kb-col-count">'+cards.length+'</span></div>';
+    colEl.innerHTML=hdr;
+    if(!cards.length){
+      var empty=document.createElement("div");
+      empty.style.cssText="color:var(--text3);font-size:11px;text-align:center;padding:14px 0;opacity:.6";
+      empty.textContent="No tasks";
+      colEl.appendChild(empty);
+    } else {
+      cards.forEach(function(t){
+        var pct=t.progress||0;
+        var projName=(D.projects[t.projectId]||{}).name||"";
+        var overdue=t.dueDate&&t.dueDate<today()&&t.status!=="COMPLETED";
+        var card=document.createElement("div");
+        card.className="kb-card";
+        if(overdue)card.style.borderLeft="3px solid var(--red)";
+        card.addEventListener("click",function(){openTaskUpdate(t.id)});
+        var meta="";
+        if(projName)meta+='<span>🏢 '+esc(projName.slice(0,14))+'</span>';
+        if(t.assignee)meta+='<span>👤 '+esc(t.assignee)+'</span>';
+        if(t.dueDate)meta+='<span style="color:'+(overdue?"var(--red)":"var(--text3)")+'">📅 '+fmtDate(t.dueDate)+'</span>';
+        if(t.blocker)meta+='<span style="color:var(--red)">🚫</span>';
+        card.innerHTML=
+          '<div class="kb-card-name">'+esc(t.name)+'</div>'+
+          '<div class="kb-card-meta">'+meta+'</div>'+
+          '<div class="kb-card-foot">'+
+            '<div class="kb-pbar"><div class="kb-pfill" style="width:'+pct+'%"></div></div>'+
+            '<span style="font-size:10px;font-weight:700;color:var(--gold2);font-family:var(--fontH)">'+pct+'%</span>'+
+          '</div>';
+        colEl.appendChild(card);
+      });
+    }
+    board.appendChild(colEl);
+  });
   var kpSel=document.getElementById("kanbanProject");
   if(kpSel){
     var prev=kpSel.value;
@@ -2394,6 +2403,7 @@ function renderKanban(){
     if(!kpSel._wired){kpSel._wired=true;kpSel.addEventListener("change",renderKanban)}
   }
 }
+
 
 // ═══════════════════════════════════════════════
 // BULK TASK ACTIONS
@@ -2628,10 +2638,13 @@ function renderEquipment(){
       '</div>'+
       '<div style="text-align:right;flex-shrink:0">'+
         '<div style="font-size:11px;font-weight:700;color:'+sc+'">'+esc(e.status||"Available")+'</div>'+
-        '<button class="btn btnD btnSm" style="margin-top:6px" onclick="deleteEquipment(''+e.id+'')">Remove</button>'+
+        '<button class="btn btnD btnSm" style="margin-top:6px" data-eid="'+e.id+'">Remove</button>'+
       '</div>'+
     '</div>';
   }).join("");
+  el.querySelectorAll("[data-eid]").forEach(function(btn){
+    btn.addEventListener("click",function(){deleteEquipment(this.dataset.eid)});
+  });
 }
 
 function saveEquipment(){
@@ -2659,13 +2672,16 @@ function renderSafetyIncidents(){
         '<div><div class="safety-title">'+esc(i.title)+'</div><div class="safety-meta">'+fmtDate(i.date)+(i.location?" · "+esc(i.location):"")+(i.person?" · "+esc(i.person):"")+'</div></div>'+
         '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">'+
           '<span class="bdg" style="background:rgba(220,38,38,.08);color:'+sevColor[i.severity||"Minor"]+';border-color:'+sevColor[i.severity||"Minor"]+'">'+esc(i.severity||"Minor")+'</span>'+
-          '<button class="btn btnD btnSm" onclick="deleteSafetyIncident(''+i.id+'')">Delete</button>'+
+          '<button class="btn btnD btnSm" data-sid="'+i.id+'">Delete</button>'+
         '</div>'+
       '</div>'+
       (i.desc?'<div style="font-size:12px;color:var(--text);margin-top:7px;line-height:1.5">'+esc(i.desc)+'</div>':"")+
       (i.action?'<div style="font-size:11px;color:var(--green);margin-top:5px;font-weight:500">✅ Action: '+esc(i.action)+'</div>':"")+
     '</div>';
   }).join("");
+  el.querySelectorAll("[data-sid]").forEach(function(btn){
+    btn.addEventListener("click",function(){deleteSafetyIncident(this.dataset.sid)});
+  });
 }
 
 function saveSafetyIncident(){
@@ -2687,25 +2703,51 @@ function renderQC(){
   var total=QC_ITEMS.length;
   var done=QC_ITEMS.filter(function(q){return qcState[q]}).length;
   var pct=Math.round(done/total*100);
-  el.innerHTML='<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:12px">'+
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'+
-      '<div style="font-family:var(--fontH);font-size:14px;font-weight:700;color:var(--gold2)">Daily Safety QC Checklist</div>'+
-      '<div style="font-family:var(--fontH);font-size:16px;font-weight:700;color:'+(pct>=80?"var(--green)":pct>=50?"var(--orange)":"var(--red)")+'">'+pct+'%</div>'+
-    '</div>'+
-    '<div class="pbar" style="height:6px;margin-bottom:12px"><div class="pfill" style="width:'+pct+'%"></div></div>'+
-    QC_ITEMS.map(function(q){
-      var checked=!!qcState[q];
-      return'<div class="qc-item'+(checked?" done":"")+'" onclick="toggleQC(''+q.replace(/'/g,"\'")+'')" >'+
-        '<div class="qc-check'+(checked?" checked":"")+'">'+( checked?"✓":"")+'</div>'+
-        '<span style="font-size:12px;font-weight:500">'+esc(q)+'</span>'+
-      '</div>';
-    }).join("")+
-    '<div style="margin-top:10px;display:flex;gap:7px">'+
-      '<button class="btn btnS btnSm" onclick="setAllQC(true)">✅ Check All</button>'+
-      '<button class="btn btnG btnSm" onclick="setAllQC(false)">↩ Reset</button>'+
-    '</div>'+
-  '</div>';
+  var pctColor=pct>=80?"var(--green)":pct>=50?"var(--orange)":"var(--red)";
+
+  var wrap=document.createElement("div");
+  wrap.style.cssText="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:12px";
+
+  var hdr=document.createElement("div");
+  hdr.style.cssText="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px";
+  hdr.innerHTML='<div style="font-family:var(--fontH);font-size:14px;font-weight:700;color:var(--gold2)">Daily Safety QC Checklist</div>'+
+    '<div style="font-family:var(--fontH);font-size:16px;font-weight:700;color:'+pctColor+'">'+pct+'%</div>';
+  wrap.appendChild(hdr);
+
+  var barWrap=document.createElement("div");
+  barWrap.className="pbar";
+  barWrap.style.cssText="height:6px;margin-bottom:12px";
+  barWrap.innerHTML='<div class="pfill" style="width:'+pct+'%"></div>';
+  wrap.appendChild(barWrap);
+
+  QC_ITEMS.forEach(function(q){
+    var checked=!!qcState[q];
+    var item=document.createElement("div");
+    item.className="qc-item"+(checked?" done":"");
+    item.innerHTML='<div class="qc-check'+(checked?" checked":"")+'">'+( checked?"✓":"")+'</div>'+
+      '<span style="font-size:12px;font-weight:500">'+esc(q)+'</span>';
+    item.addEventListener("click",function(){toggleQC(q)});
+    wrap.appendChild(item);
+  });
+
+  var btns=document.createElement("div");
+  btns.style.cssText="margin-top:10px;display:flex;gap:7px";
+  var chkAll=document.createElement("button");
+  chkAll.className="btn btnS btnSm";
+  chkAll.textContent="✅ Check All";
+  chkAll.addEventListener("click",function(){setAllQC(true)});
+  var reset=document.createElement("button");
+  reset.className="btn btnG btnSm";
+  reset.textContent="↩ Reset";
+  reset.addEventListener("click",function(){setAllQC(false)});
+  btns.appendChild(chkAll);
+  btns.appendChild(reset);
+  wrap.appendChild(btns);
+
+  el.innerHTML="";
+  el.appendChild(wrap);
 }
+
 
 function toggleQC(item){
   qcState[item]=!qcState[item];
@@ -2724,7 +2766,9 @@ function setAllQC(val){
 // ═══════════════════════════════════════════════
 var galFilterMode="all";
 
-// ─── EQUIPMENT MODAL WIRING (modals are in HTML below) ───
+// ─── end of script ───
+</script>
+
 <div class="moverlay" id="mEQ">
   <div class="modal">
     <div class="mhdr"><span class="mtitle">Add Equipment</span><button class="mclose" data-mc="mEQ">✕</button></div>
@@ -2779,6 +2823,5 @@ var galFilterMode="all";
     </div>
   </div>
 </div>
-</script>
 </body>
 </html>
